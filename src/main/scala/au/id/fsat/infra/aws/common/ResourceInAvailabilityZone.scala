@@ -1,5 +1,5 @@
 package au.id.fsat.infra.aws.common
 
-trait ResourceInAvailabilityZone[AZ <: Region.AvailabilityZone, R <: Region] extends ResourceInRegion[R] {
+trait ResourceInAvailabilityZone[R <: Region[R], AZ <: Region.AvailabilityZone[R]] extends ResourceInRegion[R] {
   def az: AZ
 }

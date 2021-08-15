@@ -11,34 +11,34 @@ object Region {
     object AvailabilityZones {
       case object UsWest2a extends UsWest2a
       trait UsWest2a extends UsWest2AvailabilityZone {
-        val name = s"${region.name}a"
         val region = UsWest2
+        val name = s"${region.name}a"
       }
 
       case object UsWest2b extends UsWest2a
       trait UsWest2b extends UsWest2AvailabilityZone {
-        val name = s"${region.name}a"
         val region = UsWest2
+        val name = s"${region.name}a"
       }
 
       case object UsWest2c extends UsWest2a
       trait UsWest2c extends UsWest2AvailabilityZone {
-        val name = s"${region.name}a"
         val region = UsWest2
+        val name = s"${region.name}a"
       }
     }
 
-    sealed trait UsWest2AvailabilityZone extends AvailabilityZone
+    sealed trait UsWest2AvailabilityZone extends AvailabilityZone[UsWest2]
   }
-  sealed trait UsWest2 extends Region
+  sealed trait UsWest2 extends Region[UsWest2]
 
-  sealed trait AvailabilityZone {
+  sealed trait AvailabilityZone[R <: Region[R]] {
     def name: String
-    def region: Region
+    def region: R
   }
 }
 
-sealed trait Region {
+sealed trait Region[Self <: Region[Self]] {
   def name: String
-  def availabilityZones: Set[Region.AvailabilityZone]
+  def availabilityZones: Set[Region.AvailabilityZone[Self]]
 }
